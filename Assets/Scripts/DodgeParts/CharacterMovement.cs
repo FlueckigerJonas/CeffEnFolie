@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField]
-    private float characterSpeed;
+    private float characterSpeed = 5;
     Vector3 move;
     public bool hasLost = false;
 
@@ -14,22 +14,23 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!hasLost)
         {
+            float moveLength = characterSpeed * Time.deltaTime;
 
             if (Input.GetKey(KeyCode.UpArrow) && transform.position.y < 4)
             {
-                transform.position += new Vector3(0, characterSpeed, 0);
+                transform.position += new Vector3(0, moveLength, 0);
             }
             if (Input.GetKey(KeyCode.LeftArrow) && transform.position.x > -8.35)
             {
-                transform.position += new Vector3(-characterSpeed, 0, 0);
+                transform.position += new Vector3(-moveLength, 0, 0);
             }
             if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < 8.35)
             {
-                transform.position += new Vector3(characterSpeed, 0, 0);
+                transform.position += new Vector3(moveLength, 0, 0);
             }
             if (Input.GetKey(KeyCode.DownArrow) && transform.position.y > -4 )
             {
-                transform.position += new Vector3(0, -characterSpeed, 0);
+                transform.position += new Vector3(0, -moveLength, 0);
             }
 
             transform.position += move;

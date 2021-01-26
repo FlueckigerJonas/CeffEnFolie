@@ -43,7 +43,7 @@ public class GameControllerDP : MonoBehaviour
         parts.Add(new Part(1, 10, 0, gameObjects[5]));
         parts.Add(new Part(1, -4, -8, gameObjects[6]));
         parts.Add(new Part(1, -10, -3, gameObjects[7]));
-        parts.Add(new Part(1, 10, -5, gameObjects[7]));
+        parts.Add(new Part(1, 10, -5, gameObjects[8]));
     }
 
     // Update is called once per frame

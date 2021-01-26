@@ -48,11 +48,11 @@ public class GameControllerPT : MonoBehaviour
             {
                 if (rotationSens)
                 {
-                    aimIndicator.transform.Rotate(new Vector3(0, 0, rotationSpeed));
+                    aimIndicator.transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime*10));
                 }
                 else
                 {
-                    aimIndicator.transform.Rotate(new Vector3(0, 0, -rotationSpeed));
+                    aimIndicator.transform.Rotate(new Vector3(0, 0, -rotationSpeed * Time.deltaTime*10));
                 }
                 int angle = Mathf.RoundToInt(aimIndicator.transform.rotation.eulerAngles.z);
                 if (angle <= 270)

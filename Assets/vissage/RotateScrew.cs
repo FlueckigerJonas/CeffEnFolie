@@ -37,14 +37,17 @@ public class RotateScrew : MonoBehaviour
     [SerializeField]
     private Sprite arrowL;
 
-    private int rotation = 0;
+    private float rotation = 0;
     private int rotationEnd = 0;
 
     private float timeConst = 0.0f;
     [SerializeField]
     private float incrementTime;
 
+    [SerializeField]
+    private float timer = 5;
 
+    bool hasLost = false;
     bool hasWon = false;
 
     // Start is called before the first frame update
@@ -57,8 +60,23 @@ public class RotateScrew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasWon)
+        if (!hasWon && ! hasLost)
         {
+            if (timer < 0)
+            {
+                hasLost = true;
+                print("lose");
+                GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+                //FIN DU TIMER = DEFAITE
+                //ICI IL PERD
+                StaticGameData.isLost = true;
+                StartCoroutine(StaticGameData.swapScene());
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+            }
             if (Input.GetKey(keyD) && position == Up && !Input.GetKey(keyA) && !Input.GetKey(keyS) && !Input.GetKey(keyW))
             {
                 screwdriver.Play();
@@ -100,8 +118,9 @@ public class RotateScrew : MonoBehaviour
                 timeConst += Time.deltaTime;
                 if (timeConst > incrementTime && !hasWon)
                 {
-                    screw.transform.Rotate(0f, 0f, -2f);
-                    rotation += 2;
+                    float rotationAmount = 500 * Time.deltaTime;
+                    screw.transform.Rotate(0f, 0f, -rotationAmount);
+                    rotation += rotationAmount;
                     timeConst = 0.0f;
                 }
             }
