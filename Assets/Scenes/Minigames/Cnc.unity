@@ -529,9 +529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5127788157de2e84e99cb945cb7cda22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winSound: {fileID: 8300000, guid: c32237d7a9b9c914285fef2bf3608ec3, type: 3}
   failedOverlay: {fileID: 1151846225}
-  timeRemaining: 10
+  timeRemaining: 5
 --- !u!82 &1250639041
 AudioSource:
   m_ObjectHideFlags: 0
