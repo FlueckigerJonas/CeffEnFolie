@@ -18,6 +18,9 @@ public class GameControllerDP : MonoBehaviour
     bool hasWon = false;
     GameObject instructions;
     private int current_tick_count = 0;
+    //Parts
+    [SerializeField]
+    float launchSpeed = 100;
 
 
 
@@ -35,15 +38,15 @@ public class GameControllerDP : MonoBehaviour
             gameObjects[x] = GameObject.Find("Part" + (x+1));
         }
         //Initializing array with data
-        parts.Add(new Part(1, -10, -6, gameObjects[0]));
-        parts.Add(new Part(1, -10, 6, gameObjects[1]));
-        parts.Add(new Part(1, 10, 0, gameObjects[2]));
-        parts.Add(new Part(1, 0, 6, gameObjects[3]));
-        parts.Add(new Part(1, 10, 6, gameObjects[4]));
-        parts.Add(new Part(1, 10, 0, gameObjects[5]));
-        parts.Add(new Part(1, -4, -8, gameObjects[6]));
-        parts.Add(new Part(1, -10, -3, gameObjects[7]));
-        parts.Add(new Part(1, 10, -5, gameObjects[8]));
+        parts.Add(new Part(-10, -6, gameObjects[0]));
+        parts.Add(new Part(-10, 6, gameObjects[1]));
+        parts.Add(new Part(10, 0, gameObjects[2]));
+        parts.Add(new Part(0, 6, gameObjects[3]));
+        parts.Add(new Part(10, 6, gameObjects[4]));
+        parts.Add(new Part(10, 0, gameObjects[5]));
+        parts.Add(new Part(-4, -8, gameObjects[6]));
+        parts.Add(new Part(-10, -3, gameObjects[7]));
+        parts.Add(new Part(10, -5, gameObjects[8]));
     }
 
     // Update is called once per frame
@@ -60,7 +63,7 @@ public class GameControllerDP : MonoBehaviour
                     instructions.SetActive(false);
                     currentPart = Random.Range(0, parts.Count);
                     print(current_tick_count);
-                    parts[currentPart].Launch(character);
+                    parts[currentPart].Launch(character, launchSpeed);
                     parts.RemoveAt(currentPart);
                 }
                 tickTimer = 0;
@@ -71,6 +74,7 @@ public class GameControllerDP : MonoBehaviour
                 AudioSource ads = GetComponent<AudioSource>();
                 ads.Stop();
                 ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+                GameObject.Find("Character").GetComponent<CharacterMovement>().hasWon = true;
                 //Mini-jeu gagné
                 //VICTOIRE
                 StaticGameData.Game.Points++;
@@ -83,25 +87,23 @@ public class GameControllerDP : MonoBehaviour
 }
 class Part
 {
-    int speed;
     int positionX;
     int positionY;
     GameObject gameObject;
 
-    public Part(int speed, int positionX, int positionY, GameObject gameObject)
+    public Part(int positionX, int positionY, GameObject gameObject)
     {
-        this.speed = speed;
         this.positionX = positionX;
         this.positionY = positionY;
         this.gameObject = gameObject;
     }
 
-    public void Launch(GameObject character) {
+    public void Launch(GameObject part, float speed) {
         
         Rigidbody2D rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
-        float x = character.transform.position.x;
-        float y = character.transform.position.y;
-        rigidbody.velocity = new Vector2((x-gameObject.transform.position.x)*speed, (y - gameObject.transform.position.y)*speed);
+        float x = part.transform.position.x;
+        float y = part.transform.position.y;
+        rigidbody.velocity = new Vector2((x-gameObject.transform.position.x)*speed*Time.deltaTime, (y - gameObject.transform.position.y)*speed * Time.deltaTime);
     }
 }

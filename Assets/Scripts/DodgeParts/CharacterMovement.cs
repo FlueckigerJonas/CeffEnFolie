@@ -8,11 +8,12 @@ public class CharacterMovement : MonoBehaviour
     private float characterSpeed = 5;
     Vector3 move;
     public bool hasLost = false;
+    public bool hasWon = false;
 
 
     void Update()
     {
-        if (!hasLost)
+        if (!hasLost && !hasWon)
         {
             float moveLength = characterSpeed * Time.deltaTime;
 
@@ -39,7 +40,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!hasLost)
+        if (!hasLost && !hasWon)
         {
             AudioSource ads = GameObject.Find("GameController").GetComponent<AudioSource>();
             ads.Stop();
