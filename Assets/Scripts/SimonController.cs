@@ -15,8 +15,8 @@ public class SimonController : MonoBehaviour
 
     private GameObject[] tiles = new GameObject[4];
 
-    private Color32[] colors = new Color32[4];
-    private Color32[] fadingColors = new Color32[4];
+    private Sprite[] darkColors = new Sprite[4];
+    private Sprite[] lightColors = new Sprite[4];
 
     private List<int> sequence = new List<int>();
     private bool sequenceFase = true;
@@ -29,21 +29,21 @@ public class SimonController : MonoBehaviour
         StaticGameData.Game.inMinigame = true;
 
         ///Initializing the colors
-        colors[0] = new Color32(255, 0, 0, 100);
-        colors[1] = new Color32(0, 255, 0, 100);
-        colors[2] = new Color32(0, 0, 255, 100);
-        colors[3] = new Color32(255, 255, 0, 100);
+        darkColors[0] = Resources.Load<Sprite>("simon/dark_green") as Sprite;
+        darkColors[1] = Resources.Load<Sprite>("simon/dark_red") as Sprite;
+        darkColors[2] = Resources.Load<Sprite>("simon/dark_blue") as Sprite;
+        darkColors[3] = Resources.Load<Sprite>("simon/dark_yellow") as Sprite;
 
-        fadingColors[0] = new Color32(255, 0, 0, 20);
-        fadingColors[1] = new Color32(0, 255, 0, 20);
-        fadingColors[2] = new Color32(0, 0, 255, 20);
-        fadingColors[3] = new Color32(255, 255, 0, 20);
+        lightColors[0] = Resources.Load<Sprite>("simon/light_green") as Sprite;
+        lightColors[1] = Resources.Load<Sprite>("simon/light_red") as Sprite;
+        lightColors[2] = Resources.Load<Sprite>("simon/light_blue") as Sprite;
+        lightColors[3] = Resources.Load<Sprite>("simon/light_yellow") as Sprite;
 
         ///Fetching the gameobjects
         for (int i = 0; i < 4; i++)
         {
             tiles[i] = TileContainer.transform.GetChild(i).gameObject;
-            tiles[i].GetComponent<Image>().color = fadingColors[i];
+            tiles[i].GetComponent<Image>().sprite = darkColors[i];
 
             tiles[i].name = i.ToString();
         }
@@ -66,7 +66,7 @@ public class SimonController : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            tiles[i].GetComponent<Image>().color = fadingColors[i];
+            tiles[i].GetComponent<Image>().sprite = darkColors[i];
         }
     }
 
@@ -77,7 +77,7 @@ public class SimonController : MonoBehaviour
             if (sequenceFase == false)
             {
                 resetColors();
-                button.GetComponent<Image>().color = colors[int.Parse(button.name)];
+                button.GetComponent<Image>().sprite = lightColors[int.Parse(button.name)];
                 if (actualSequenceItem == 5)
                 {
                     goodEnd();
@@ -103,10 +103,10 @@ public class SimonController : MonoBehaviour
         GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
         gameIsEnd = true;
-        tiles[0].GetComponent<Image>().color = colors[0];
-        tiles[1].GetComponent<Image>().color = colors[0];
-        tiles[2].GetComponent<Image>().color = colors[0];
-        tiles[3].GetComponent<Image>().color = colors[0];
+        tiles[0].GetComponent<Image>().sprite = lightColors[1];
+        tiles[1].GetComponent<Image>().sprite = lightColors[1];
+        tiles[2].GetComponent<Image>().sprite = lightColors[1];
+        tiles[3].GetComponent<Image>().sprite = lightColors[1];
     }
 
     private void goodEnd()
@@ -115,10 +115,10 @@ public class SimonController : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
         StaticGameData.Game.Points++;
         gameIsEnd = true;
-        tiles[0].GetComponent<Image>().color = colors[1];
-        tiles[1].GetComponent<Image>().color = colors[1];
-        tiles[2].GetComponent<Image>().color = colors[1];
-        tiles[3].GetComponent<Image>().color = colors[1];
+        tiles[0].GetComponent<Image>().sprite = lightColors[0];
+        tiles[1].GetComponent<Image>().sprite = lightColors[0];
+        tiles[2].GetComponent<Image>().sprite = lightColors[0];
+        tiles[3].GetComponent<Image>().sprite = lightColors[0];
     }
 
     private float elapsed = 0f;
@@ -144,16 +144,16 @@ public class SimonController : MonoBehaviour
             switch (sequence[sequenceNumber])
             {
                 case 0:
-                    tiles[0].GetComponent<Image>().color = colors[0];
+                    tiles[0].GetComponent<Image>().sprite = lightColors[0];
                     break;
                 case 1:
-                    tiles[1].GetComponent<Image>().color = colors[1];
+                    tiles[1].GetComponent<Image>().sprite = lightColors[1];
                     break;
                 case 2:
-                    tiles[2].GetComponent<Image>().color = colors[2];
+                    tiles[2].GetComponent<Image>().sprite = lightColors[2];
                     break;
                 case 3:
-                    tiles[3].GetComponent<Image>().color = colors[3];
+                    tiles[3].GetComponent<Image>().sprite = lightColors[3];
                     break;
             }
             sequenceNumber++;
