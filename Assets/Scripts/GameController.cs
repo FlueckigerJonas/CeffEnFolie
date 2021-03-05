@@ -16,26 +16,7 @@ public class GameController : MonoBehaviour
     private AudioClip lossSoundEffect;
     void Start()
     {
-        List<string> sceneList = new List<string>();
-
-        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
-        string[] scenes = new string[sceneCount];
-
-        
-        for (int i = 0; i < sceneCount; i++)
-        {
-            if (System.IO.Path.GetFullPath(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i)).Contains("Minigames"))
-            {
-                sceneList.Add(System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i)));
-            }
-        }
-                   
-
-        game = new Game(sceneList);
-
-        Randomizer.ShuffleMinigames<Minigame>(game.Minigames);
-
-        StaticGameData.Game = game;
+        StaticGameData.Game = StaticGameData.getNewGame();
         StaticGameData.winSoundEffect = this.winSoundEffect;
         StaticGameData.lossSoundEffect = this.lossSoundEffect;
     }
@@ -55,7 +36,38 @@ public class GameController : MonoBehaviour
 
     public void onClickQuit()
     {
+        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         Application.Quit();
+    }
+
+    public void onClickOptions()
+    {
+        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
+    }
+
+    public void onClickMenu()
+    {
+        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+    }
+
+    public void onClickSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if (StaticGameData.isSoundOn)
+            StaticGameData.isSoundOn = false;
+        else
+            StaticGameData.isSoundOn = true;
+    }
+
+    public void onClickMusic()
+    {
+        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if (StaticGameData.isMusicOn)
+            StaticGameData.isMusicOn = false;
+        else
+            StaticGameData.isMusicOn = true;
     }
 }
 
@@ -65,8 +77,10 @@ public static class StaticGameData{
     public static bool isLost { get; set; } = false;
     public static AudioClip winSoundEffect { get; set; }
     public static AudioClip lossSoundEffect { get; set; }
+    public static bool isSoundOn { get; set; } = true;
+    public static bool isMusicOn { get; set; } = true;
 
-    public static IEnumerator swapScene(float timeBetweenScene = 2f)
+    public static IEnumerator swapScene(float timeBetweenScene = 0.5f)
     {
 
         yield return new WaitForSeconds(timeBetweenScene);
@@ -83,5 +97,28 @@ public static class StaticGameData{
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScreen");
         
+    }
+
+    public static Game getNewGame()
+    {
+        List<string> sceneList = new List<string>();
+
+        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+        string[] scenes = new string[sceneCount];
+
+
+        for (int i = 0; i < sceneCount; i++)
+        {
+            if (System.IO.Path.GetFullPath(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i)).Contains("Minigames"))
+            {
+                sceneList.Add(System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i)));
+            }
+        }
+
+
+        Game game = new Game(sceneList);
+
+        Randomizer.ShuffleMinigames<Minigame>(game.Minigames);
+        return game;
     }
 }
