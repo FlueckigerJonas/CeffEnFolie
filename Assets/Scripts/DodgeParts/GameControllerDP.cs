@@ -14,10 +14,11 @@ public class GameControllerDP : MonoBehaviour
     //Timer management
     private float tickTimer = 0;
     private const float TICK_LENGTH = 1f;
+    private int current_tick_count = 0;
+
     CharacterMovement cm;
     bool hasWon = false;
     GameObject instructions;
-    private int current_tick_count = 0;
     //Parts
     [SerializeField]
     float launchSpeed = 100;
