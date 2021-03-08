@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     private Sprite soundImage;
     void Start()
     {
+        Screen.fullScreen = true;
         StaticGameData.Game = StaticGameData.getNewGame();
         StaticGameData.winSoundEffect = this.winSoundEffect;
         StaticGameData.lossSoundEffect = this.lossSoundEffect;
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour
     public void onClickQuit()
     {
         GetComponent<AudioSource>().PlayOneShot(impact, 1F);
-        Application.Quit();
+        Application.Quit(0);
     }
 
     public void onClickOptions()
