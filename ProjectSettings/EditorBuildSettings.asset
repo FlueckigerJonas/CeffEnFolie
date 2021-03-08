@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/ArriveOnTime.unity
     guid: c034db14bc063c443a443050eb96c620
   - enabled: 1
+    path: Assets/Scenes/Minigames/Homework.unity
+    guid: 2ffd4d3a3d8a4c843bca722ada7ed6dc
+  - enabled: 1
     path: Assets/Scenes/Minigames/Difference.unity
     guid: c8ccd117a924c494abdb664e2aaf789c
   - enabled: 1
