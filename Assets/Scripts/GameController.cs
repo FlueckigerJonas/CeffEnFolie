@@ -29,7 +29,10 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
     }
 
     public void onClickStart()
