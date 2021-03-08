@@ -3,6 +3,7 @@ using UnityEngine;
 using TIBLibrary;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class GameController : MonoBehaviour
     private AudioClip winSoundEffect;
     [SerializeField]
     private AudioClip lossSoundEffect;
+    [SerializeField]
+    private Sprite noSoundImage;
+    [SerializeField]
+    private Sprite soundImage;
     void Start()
     {
         StaticGameData.Game = StaticGameData.getNewGame();
@@ -44,12 +49,14 @@ public class GameController : MonoBehaviour
     {
         GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Menu");
     }
 
     public void onClickMenu()
     {
         GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Options");
     }
 
     public void onClickSound()
@@ -59,6 +66,11 @@ public class GameController : MonoBehaviour
             StaticGameData.isSoundOn = false;
         else
             StaticGameData.isSoundOn = true;
+
+        if(GameObject.Find("SoundButton").GetComponent<Image>().sprite == soundImage)
+            GameObject.Find("SoundButton").GetComponent<Image>().sprite = noSoundImage;
+        else
+            GameObject.Find("SoundButton").GetComponent<Image>().sprite = soundImage;
     }
 
     public void onClickMusic()
@@ -68,6 +80,11 @@ public class GameController : MonoBehaviour
             StaticGameData.isMusicOn = false;
         else
             StaticGameData.isMusicOn = true;
+
+        if (GameObject.Find("MusicButton").GetComponent<Image>().sprite == soundImage)
+            GameObject.Find("MusicButton").GetComponent<Image>().sprite = noSoundImage;
+        else
+            GameObject.Find("MusicButton").GetComponent<Image>().sprite = soundImage;
     }
 }
 
