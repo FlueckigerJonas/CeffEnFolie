@@ -80,7 +80,7 @@ public class RotateScrew : MonoBehaviour
             if (Input.GetKey(keyD) && position == Up && !Input.GetKey(keyA) && !Input.GetKey(keyS) && !Input.GetKey(keyW))
             {
                 screwdriver.Play();
-                rotationEnd += 90;
+                rotationEnd += 100;
                 print("D");
                 position = Right;
                 ChangeSprite(3);
@@ -89,7 +89,7 @@ public class RotateScrew : MonoBehaviour
             if (Input.GetKey(keyS) && position == Right && !Input.GetKey(keyA) && !Input.GetKey(keyD) && !Input.GetKey(keyW))
             {
                 screwdriver.Play();
-                rotationEnd += 90;
+                rotationEnd += 100;
                 print("S");
                 position = Down;
                 ChangeSprite(4);
@@ -98,7 +98,7 @@ public class RotateScrew : MonoBehaviour
             if (Input.GetKey(keyA) && position == Down && !Input.GetKey(keyS) && !Input.GetKey(keyW) && !Input.GetKey(keyD))
             {
                 screwdriver.Play();
-                rotationEnd += 90;
+                rotationEnd += 100;
                 print("A");
                 position = Left;
                 ChangeSprite(1);
@@ -107,7 +107,7 @@ public class RotateScrew : MonoBehaviour
             if (Input.GetKey(keyW) && position == Left && !Input.GetKey(keyA) && !Input.GetKey(keyS) && !Input.GetKey(keyD))
             {
                 screwdriver.Play();
-                rotationEnd += 90;
+                rotationEnd += 100;
                 print("W");
                 position = Up;
                 ChangeSprite(2);
@@ -125,7 +125,7 @@ public class RotateScrew : MonoBehaviour
                 }
             }
         }
-        if(rotation >= 1800 && !hasWon)
+        if(rotation >= 1000 && !hasWon)
         {
             music.Stop();
             music.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
