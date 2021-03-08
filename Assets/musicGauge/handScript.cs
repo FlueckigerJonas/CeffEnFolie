@@ -69,6 +69,14 @@ public class handScript : MonoBehaviour
                     StaticGameData.Game.Points++;
                     StartCoroutine(StaticGameData.swapScene());
                 }
+                else
+                {
+                    hasLost = true;
+                    ads.Stop();
+                    if (StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);                                                                                     //Perdu
+                    StaticGameData.isLost = true;
+                    StartCoroutine(StaticGameData.swapScene());
+                }
             }
             else if(!hasWon)
             {
