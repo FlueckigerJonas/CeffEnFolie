@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4315454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 4.287771, z: -0.11622405}
+  m_LocalPosition: {x: -6, y: 3.28, z: -0.11622405}
   m_LocalScale: {x: -1, y: 0.9549, z: 1}
   m_Children: []
   m_Father: {fileID: 787052113}
@@ -194,7 +194,7 @@ SpriteRenderer:
   m_SortingLayerID: -1810732751
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 3b5c916b0d27265439a01da16fccefdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fede44fc1058996478b1e46e4685fd07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a223563fd9a4de14c9a7566e2cf45c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressCountToWin: 59
+  pressCountToWin: 71
   countDownLength: 10
   timerIsRunning: 0
 --- !u!4 &787052113
@@ -674,7 +674,7 @@ SpriteRenderer:
   m_SortingLayerID: 1109380377
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: eb50036f3876b364a9965f5aa6cad52f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5fafbc675083c2b40a04a1a2492233c6, type: 3}
   m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_FlipX: 0
   m_FlipY: 0

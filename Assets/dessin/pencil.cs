@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pencil : MonoBehaviour
+public class Pencil : MonoBehaviour
 {
 
     [SerializeField]
@@ -25,8 +25,8 @@ public class pencil : MonoBehaviour
     private GameObject pencil1;
 
     private AudioSource ads1;
-    private AudioSource ads2;
     bool hasWon = false;
+    bool hasLost = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -36,8 +36,12 @@ public class pencil : MonoBehaviour
 
     void Start()
     {
-        ads1 = GetComponents<AudioSource>()[0];
-        ads2 = GetComponents<AudioSource>()[1];
+        ads1 = GetComponent<AudioSource>();
+        if (StaticGameData.isMusicOn)
+            ads1.volume = 0.775f;
+        else
+            ads1.volume = 0;
+
         collision = pencil1.GetComponent<pieceVelocity>();
     }
 
@@ -85,12 +89,11 @@ public class pencil : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
         }
-        else
+        else if(!hasLost)
         {
+            hasLost = true;
             ads1.Stop();
-            ads2.Stop();
-            ads2.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
-            print("Lost");                                                                                         //Perdu
+            if(StaticGameData.isSoundOn) ads1.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
             StaticGameData.isLost = true;
             StartCoroutine(StaticGameData.swapScene());
         }
@@ -98,20 +101,19 @@ public class pencil : MonoBehaviour
 
         if(hasWon)
         {
-            print("Won");
-            ads1.Stop();
-            ads2.Stop();
-            ads2.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);                                                  //Gagné
-            StaticGameData.Game.Points++;
-            StartCoroutine(StaticGameData.swapScene());
+           
         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "end")
+        if (col.gameObject.name == "End" && !hasWon)
         {
-            hasWon = true;                                                                                        //Gagné
+            hasWon = true;
+            ads1.Stop();
+            if(StaticGameData.isSoundOn) ads1.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+            StaticGameData.Game.Points++;
+            StartCoroutine(StaticGameData.swapScene());
         }
     }
 }

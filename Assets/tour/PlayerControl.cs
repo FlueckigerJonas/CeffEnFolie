@@ -18,7 +18,6 @@ public class PlayerControl : MonoBehaviour
     private float moveY = 0;
     private Rigidbody2D rigBody;
 
-    private AudioSource ads1;
     private AudioSource ads2;
 
     private AudioSource lathe;
@@ -43,14 +42,11 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (StaticGameData.isMusicOn)
-            GetComponent<AudioSource>().volume = 0.775f;
+        ads2 = GetComponent<AudioSource>();
+        if (StaticGameData.isSoundOn)
+            ads2.volume = 0.775f;
         else
-            GetComponent<AudioSource>().volume = 0;
-
-
-        ads1 = GetComponents<AudioSource>()[0];
-        ads2 = GetComponents<AudioSource>()[1];
+            ads2.volume = 0;
         collision = piece.GetComponent<pieceVelocity>();
 
         lathe = GetComponent<AudioSource>();
@@ -100,7 +96,6 @@ public class PlayerControl : MonoBehaviour
 
         if(moveX == 0  && moveY == 0 && isInTolerance && !perdu && !hasWon)
         {
-            ads1.Stop();
             ads2.Stop();
             if(StaticGameData.isSoundOn) ads2.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
             hasWon = true;
@@ -126,7 +121,6 @@ public class PlayerControl : MonoBehaviour
 
         if(perdu)
         {
-            ads1.Stop();
             ads2.Stop();
             if (StaticGameData.isSoundOn) ads2.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
             print("Perdu");                                                                                         //Perdu

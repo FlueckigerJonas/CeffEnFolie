@@ -8,7 +8,8 @@ public class playerInteract : MonoBehaviour
 
     private int interactions = 0;
 
-    private AudioSource cnc;
+    private AudioSource ads1;
+    private AudioSource ads2;
 
     [SerializeField]
     private GameObject failedOverlay;
@@ -23,13 +24,20 @@ public class playerInteract : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!StaticGameData.isMusicOn)
-            GetComponent<AudioSource>().volume = 0.775f;
-        else
-            GetComponent<AudioSource>().volume = 0;
         failedOverlay.SetActive(false);
-        cnc = GetComponent<AudioSource>();
-        cnc.Play();
+        ads1 = GetComponents<AudioSource>()[1];
+        ads2 = GetComponents<AudioSource>()[0];
+
+        if (StaticGameData.isMusicOn)
+            ads1.volume = 0.775f;
+        else
+            ads1.volume = 0;
+
+        if(StaticGameData.isSoundOn)
+            ads2.volume = 0.775f;
+        else
+            ads2.volume = 0;
+
 
 
     }

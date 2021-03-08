@@ -28,10 +28,16 @@ public class handScript : MonoBehaviour
     [SerializeField]
     private int green = 20;
 
+    AudioSource ads;
+
     // Start is called before the first frame update
     void Start()
     {
-        //music = GetComponents<AudioSource>()[1];
+        ads = GetComponent<AudioSource>();
+        if (StaticGameData.isMusicOn)
+           ads.volume = 0.775f;
+        else
+           ads.volume = 0;
     }
 
     // Update is called once per frame
@@ -39,14 +45,13 @@ public class handScript : MonoBehaviour
     {
         if(!hasWon && !hasLost)
         {
-            if (timer < 0)
+            if (timer < 0 && !hasLost)
             {
                 hasLost = true;
-                print("lose");
-                //GetComponent<AudioSource>().Stop();
-                //GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+                ads.Stop();
+                if(StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);                                                                                     //Perdu
                 StaticGameData.isLost = true;
-                //StartCoroutine(StaticGameData.swapScene());
+                StartCoroutine(StaticGameData.swapScene());
             }
             else
             {
@@ -58,12 +63,11 @@ public class handScript : MonoBehaviour
                 hand.transform.Rotate(0f, 0f, 0f);
                 if(rotation > (-green) && rotation < green)
                 {
-                    print("win");
-                    //music.Stop();
-                    //music.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
                     hasWon = true;
-                    //StaticGameData.Game.Points++;
-                    //StartCoroutine(StaticGameData.swapScene());
+                    ads.Stop();
+                    if (StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+                    StaticGameData.Game.Points++;
+                    StartCoroutine(StaticGameData.swapScene());
                 }
             }
             else if(!hasWon)

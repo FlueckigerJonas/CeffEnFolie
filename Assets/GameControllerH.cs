@@ -82,11 +82,11 @@ public class GameControllerH : MonoBehaviour
                     StartCoroutine(StaticGameData.swapScene());
                 }
                 columnCount++;
-                if (pressCount % 10 == 0) { 
+                if (pressCount % 12 == 0) { 
                     arrowCount++;
                     columnCount = 0;
                 }
-                pencil.transform.position = new Vector3((-6)+columnCount * 0.5f, 4f-arrowCount, 1.0f);
+                pencil.transform.position = new Vector3((-6)+columnCount * 0.5f, 3f-arrowCount*1.2f, 1.0f);
             }
             else if(e.type == EventType.KeyUp && lastKeyState == true)
             {

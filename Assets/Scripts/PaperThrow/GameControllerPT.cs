@@ -30,16 +30,17 @@ public class GameControllerPT : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
         aimIndicator = GameObject.Find("AimIndicator");
         trashcan = GameObject.Find("Trashcan");
         timerDisplay = GameObject.Find("Canvas/TimerDisplay").GetComponent<Text>();
         paperBall = GameObject.Find("PaperBall");
         paperBall.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         ballEnters = trashcan.GetComponent<BallEnters>();
-        if (StaticGameData.isMusicOn)
-            GetComponent<AudioSource>().volume = 0.775f;
-        else
-            GetComponent<AudioSource>().volume = 0;
+        
 
     }
 
@@ -88,16 +89,13 @@ public class GameControllerPT : MonoBehaviour
 
     private void OnGUI()
     {
-        switch (Event.current.keyCode)
+        Event e = Event.current;
+        if (e.isKey && e.keyCode == KeyCode.Space && e.type == EventType.KeyDown && isAiming)
         {
-            case KeyCode.Space:
-                if (isAiming)
-                {
-                    launchPaperBall();
-                    isAiming = false;
-                }
-                break;
+            launchPaperBall();
+            isAiming = false;
         }
+        
     }
 
     private void launchPaperBall()

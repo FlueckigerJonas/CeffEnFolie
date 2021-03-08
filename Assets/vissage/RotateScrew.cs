@@ -139,7 +139,7 @@ public class RotateScrew : MonoBehaviour
         if(rotation >= 1000 && !hasWon)
         {
             music.Stop();
-            music.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+            if(StaticGameData.isSoundOn)music.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
             hasWon = true;
             StaticGameData.Game.Points++;
             StartCoroutine(StaticGameData.swapScene());

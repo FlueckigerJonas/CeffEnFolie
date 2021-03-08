@@ -42,34 +42,34 @@ public class GameController : MonoBehaviour
 
     public void onClickStart()
     {
-        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if(StaticGameData.isSoundOn)GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         SceneManager.LoadScene("LoadingScreen");
         
     }
 
     public void onClickQuit()
     {
-        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         Application.Quit(0);
     }
 
     public void onClickOptions()
     {
-        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Options");
         UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Menu");
     }
 
     public void onClickMenu()
     {
-        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Options");
     }
 
     public void onClickSound()
     {
-        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         if (StaticGameData.isSoundOn)
             StaticGameData.isSoundOn = false;
         else
@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour
 
     public void onClickMusic()
     {
-        GetComponent<AudioSource>().PlayOneShot(impact, 1F);
+        if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(impact, 1F);
         if (StaticGameData.isMusicOn)
             StaticGameData.isMusicOn = false;
         else
