@@ -48,6 +48,12 @@ public class GameControllerDP : MonoBehaviour
         parts.Add(new Part(-4, -8, gameObjects[6]));
         parts.Add(new Part(-10, -3, gameObjects[7]));
         parts.Add(new Part(10, -5, gameObjects[8]));
+
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
     }
 
     // Update is called once per frame
@@ -74,7 +80,7 @@ public class GameControllerDP : MonoBehaviour
                 hasWon = true;
                 AudioSource ads = GetComponent<AudioSource>();
                 ads.Stop();
-                ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+                if (StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
                 GameObject.Find("Character").GetComponent<CharacterMovement>().hasWon = true;
                 //Mini-jeu gagné
                 //VICTOIRE

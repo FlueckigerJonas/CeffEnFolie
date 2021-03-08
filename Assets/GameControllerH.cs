@@ -35,6 +35,12 @@ public class GameControllerH : MonoBehaviour
         timerDisplay = GameObject.Find("Canvas/TimerDisplay").GetComponent<Text>();
         downArrowUp.SetActive(true);
         downArrowDown.SetActive(false);
+
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
     }
 
     // Update is called once per frame
@@ -48,7 +54,7 @@ public class GameControllerH : MonoBehaviour
             hasLost = true;
             AudioSource ads = GameObject.Find("GameController").GetComponent<AudioSource>();
             ads.Stop();
-            ads.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+            if (StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
             StaticGameData.isLost = true;
             StartCoroutine(StaticGameData.swapScene());
         }

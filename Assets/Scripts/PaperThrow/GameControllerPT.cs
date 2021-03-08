@@ -36,6 +36,11 @@ public class GameControllerPT : MonoBehaviour
         paperBall = GameObject.Find("PaperBall");
         paperBall.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         ballEnters = trashcan.GetComponent<BallEnters>();
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
     }
 
     // Update is called once per frame

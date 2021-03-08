@@ -24,6 +24,11 @@ public class GameSetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
         topWall.size = new Vector2(Screen.width + 2f, 1f);
         topWall.offset = new Vector2(0, -0.2f);
 

@@ -23,9 +23,15 @@ public class playerInteract : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
         failedOverlay.SetActive(false);
         cnc = GetComponent<AudioSource>();
         cnc.Play();
+
+
     }
 
     // Update is called once per frame
@@ -46,7 +52,7 @@ public class playerInteract : MonoBehaviour
         {
             GetComponents<AudioSource>()[0].Stop();
             GetComponents<AudioSource>()[1].Stop();
-            GetComponents<AudioSource>()[1].PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+            if(StaticGameData.isSoundOn) GetComponents<AudioSource>()[1].PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
             hasWon = true;
             print("Gagne");                                                                                     //Jeu gagné
             StaticGameData.Game.Points++;
@@ -61,7 +67,7 @@ public class playerInteract : MonoBehaviour
         {
             GetComponents<AudioSource>()[0].Stop();
             GetComponents<AudioSource>()[1].Stop();
-            GetComponents<AudioSource>()[1].PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+            if (StaticGameData.isSoundOn)  GetComponents<AudioSource>()[1].PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
             interactions++;
             print("Perdu");                                                                                     //Jeu perdu
             print("Interactions : " + interactions + ", KeyCode : " + e.keyCode);
@@ -73,7 +79,7 @@ public class playerInteract : MonoBehaviour
 
             GetComponents<AudioSource>()[0].Stop();
             GetComponents<AudioSource>()[1].Stop();
-            GetComponents<AudioSource>()[1].PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+            if (StaticGameData.isSoundOn)  GetComponents<AudioSource>()[1].PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
             interactions++;
             print("Perdu");                                                                                     //Jeu perdu
             print("Interaction : " + interactions + ", Mouse clicked !");

@@ -11,7 +11,7 @@ public class BallEnters : MonoBehaviour
         {
             AudioSource ads = GameObject.Find("GameController").GetComponent<AudioSource>();
             ads.Stop();
-            ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+            if(StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
             print("victoire");
             //La balle est rentrée = victoire 
             //IL GAGNE ICI

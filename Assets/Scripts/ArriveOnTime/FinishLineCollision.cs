@@ -10,7 +10,7 @@ public class FinishLineCollision : MonoBehaviour
         hasArrived = true;
         AudioSource audioSource = GameObject.Find("GameController").GetComponent<AudioSource>();
         audioSource.Stop();
-        audioSource.PlayOneShot(StaticGameData.winSoundEffect, 1F);
+        if(StaticGameData.isSoundOn) audioSource.PlayOneShot(StaticGameData.winSoundEffect, 1F);
         StaticGameData.Game.Points++;
         StartCoroutine(StaticGameData.swapScene());
     }

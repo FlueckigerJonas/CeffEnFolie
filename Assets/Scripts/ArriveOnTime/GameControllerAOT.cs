@@ -36,7 +36,12 @@ public class GameControllerAOT : MonoBehaviour
         rightArrowDown.SetActive(false);
         timerIsRunning = true;
         characterScript = character.GetComponent<FinishLineCollision>();
-        
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
+
     }
 
     // Update is called once per frame
@@ -70,7 +75,7 @@ public class GameControllerAOT : MonoBehaviour
             else if(!hasLost)
             {
                 GetComponent<AudioSource>().Stop();
-                GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+                if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
                 hasLost = true;
                 //IL PERD ICI
                 timerIsRunning = false;
@@ -78,7 +83,6 @@ public class GameControllerAOT : MonoBehaviour
                 rightArrowDown.SetActive(false);
                 leftArrowUp.SetActive(true);
                 leftArrowDown.SetActive(false);
-
                 StaticGameData.isLost = true;
                 StartCoroutine(StaticGameData.swapScene());
             }

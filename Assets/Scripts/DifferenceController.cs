@@ -41,6 +41,12 @@ public class DifferenceController : MonoBehaviour
         tiles[1].GetComponent<Button>().onClick.AddListener(() => { onClickListener(tiles[1]); });
         tiles[2].GetComponent<Button>().onClick.AddListener(() => { onClickListener(tiles[2]); });
         tiles[3].GetComponent<Button>().onClick.AddListener(() => { onClickListener(tiles[3]); });
+
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
     }
 
     // Update is called once per frame
@@ -56,14 +62,14 @@ public class DifferenceController : MonoBehaviour
             //Jeu gagne
             StaticGameData.Game.Points++;
             GetComponent<AudioSource>().Stop();
-            GetComponent<AudioSource>().PlayOneShot(StaticGameData.winSoundEffect, 1F);
+            if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(StaticGameData.winSoundEffect, 1F);
             button.GetComponent<Image>().color = new Color32(0, 255, 0, 80);
         }
         else
         {
             //Jeu perdu
             GetComponent<AudioSource>().Stop();
-            GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 1F);
+            if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 1F);
             button.GetComponent<Image>().color = new Color32(255, 0, 0, 80);
             StaticGameData.isLost = true;
         }

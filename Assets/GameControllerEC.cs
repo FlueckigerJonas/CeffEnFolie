@@ -40,7 +40,12 @@ public class GameControllerEC : MonoBehaviour
             }
             lettersToPress[i] = temp;
         }
-        
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
+
     }
 
     void Update()
@@ -50,7 +55,7 @@ public class GameControllerEC : MonoBehaviour
             hasWon = true;
             AudioSource ads = GetComponent<AudioSource>();
             ads.Stop();
-            ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+            if(StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
             StaticGameData.Game.Points++;
             StartCoroutine(StaticGameData.swapScene());
         }

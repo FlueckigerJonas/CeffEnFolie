@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
         {
             AudioSource ads = GameObject.Find("GameController").GetComponent<AudioSource>();
             ads.Stop();
-            ads.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+            if(StaticGameData.isSoundOn) ads.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
             hasLost = true;
             StaticGameData.isLost = true;
             StartCoroutine(StaticGameData.swapScene());

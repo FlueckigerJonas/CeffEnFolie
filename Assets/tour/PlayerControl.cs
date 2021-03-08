@@ -43,6 +43,12 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
+
         ads1 = GetComponents<AudioSource>()[0];
         ads2 = GetComponents<AudioSource>()[1];
         collision = piece.GetComponent<pieceVelocity>();
@@ -96,7 +102,7 @@ public class PlayerControl : MonoBehaviour
         {
             ads1.Stop();
             ads2.Stop();
-            ads2.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+            if(StaticGameData.isSoundOn) ads2.PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
             hasWon = true;
             print("Gagne");                                                                                         //Gagné
             StaticGameData.Game.Points++;
@@ -122,7 +128,7 @@ public class PlayerControl : MonoBehaviour
         {
             ads1.Stop();
             ads2.Stop();
-            ads2.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+            if (StaticGameData.isSoundOn) ads2.PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
             print("Perdu");                                                                                         //Perdu
             StaticGameData.isLost = true;
             StartCoroutine(StaticGameData.swapScene());

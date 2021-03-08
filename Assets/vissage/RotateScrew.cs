@@ -53,8 +53,19 @@ public class RotateScrew : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         screwdriver = GetComponents<AudioSource>()[0];
         music = GetComponents<AudioSource>()[1];
+
+        if (!StaticGameData.isMusicOn)
+            music.volume = 0f;
+        else
+            music.volume = 0.775f;
+        if (!StaticGameData.isSoundOn)
+            screwdriver.volume = 0f;
+        else
+            screwdriver.volume = 0.775f;
+
     }
 
     // Update is called once per frame
@@ -67,7 +78,7 @@ public class RotateScrew : MonoBehaviour
                 hasLost = true;
                 print("lose");
                 GetComponent<AudioSource>().Stop();
-                GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+                if(StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
                 //FIN DU TIMER = DEFAITE
                 //ICI IL PERD
                 StaticGameData.isLost = true;

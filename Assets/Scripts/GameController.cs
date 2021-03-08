@@ -21,6 +21,10 @@ public class GameController : MonoBehaviour
     private Sprite soundImage;
     void Start()
     {
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
         Screen.fullScreen = true;
         StaticGameData.Game = StaticGameData.getNewGame();
         StaticGameData.winSoundEffect = this.winSoundEffect;

@@ -244,7 +244,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impact: {fileID: 8300000, guid: 741f250e4a107b54fac0fa7efac9dc24, type: 3}
   winSoundEffect: {fileID: 8300000, guid: c32237d7a9b9c914285fef2bf3608ec3, type: 3}
-  lossSoundEffect: {fileID: 0}
+  lossSoundEffect: {fileID: 8300000, guid: 44d47c1b0a68eda4283c0259dffcae58, type: 3}
+  noSoundImage: {fileID: 0}
+  soundImage: {fileID: 0}
 --- !u!82 &330062350
 AudioSource:
   m_ObjectHideFlags: 0

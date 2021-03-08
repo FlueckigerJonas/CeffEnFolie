@@ -60,6 +60,12 @@ public class SimonController : MonoBehaviour
             sequence.Add(sequenceItem);
         }
 
+        if (StaticGameData.isMusicOn)
+            GetComponent<AudioSource>().volume = 0.775f;
+        else
+            GetComponent<AudioSource>().volume = 0;
+
+
     }
 
     private void resetColors()
@@ -101,7 +107,7 @@ public class SimonController : MonoBehaviour
     private void badEnd()
     {
         GetComponent<AudioSource>().Stop();
-        GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
+        if(StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(StaticGameData.lossSoundEffect, 0.5f);
         gameIsEnd = true;
         tiles[0].GetComponent<Image>().sprite = lightColors[1];
         tiles[1].GetComponent<Image>().sprite = lightColors[1];
@@ -112,7 +118,7 @@ public class SimonController : MonoBehaviour
     private void goodEnd()
     {
         GetComponent<AudioSource>().Stop();
-        GetComponent<AudioSource>().PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
+        if (StaticGameData.isSoundOn) GetComponent<AudioSource>().PlayOneShot(StaticGameData.winSoundEffect, 0.5f);
         StaticGameData.Game.Points++;
         gameIsEnd = true;
         tiles[0].GetComponent<Image>().sprite = lightColors[0];
