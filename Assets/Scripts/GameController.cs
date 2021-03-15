@@ -4,6 +4,8 @@ using TIBLibrary;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
+using System.IO;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class GameController : MonoBehaviour
         StaticGameData.Game = StaticGameData.getNewGame();
         StaticGameData.winSoundEffect = this.winSoundEffect;
         StaticGameData.lossSoundEffect = this.lossSoundEffect;
+
+        StaticGameData.saveHighScore();
     }
 
     // Update is called once per frame
@@ -38,6 +42,29 @@ public class GameController : MonoBehaviour
             GetComponent<AudioSource>().volume = 0.775f;
         else
             GetComponent<AudioSource>().volume = 0;
+
+        checkSoundImage();
+    }
+
+    private void checkSoundImage()
+    {
+        try
+        {
+            if (StaticGameData.isSoundOn)
+                GameObject.Find("SoundButton").GetComponent<Image>().sprite = soundImage;
+            else
+                GameObject.Find("SoundButton").GetComponent<Image>().sprite = noSoundImage;
+
+
+            if (StaticGameData.isMusicOn)
+                GameObject.Find("MusicButton").GetComponent<Image>().sprite = soundImage;
+            else
+                GameObject.Find("MusicButton").GetComponent<Image>().sprite = noSoundImage;
+        }
+        catch
+        {
+
+        }
     }
 
     public void onClickStart()
@@ -75,10 +102,7 @@ public class GameController : MonoBehaviour
         else
             StaticGameData.isSoundOn = true;
 
-        if(GameObject.Find("SoundButton").GetComponent<Image>().sprite == soundImage)
-            GameObject.Find("SoundButton").GetComponent<Image>().sprite = noSoundImage;
-        else
-            GameObject.Find("SoundButton").GetComponent<Image>().sprite = soundImage;
+        checkSoundImage();
     }
 
     public void onClickMusic()
@@ -89,15 +113,13 @@ public class GameController : MonoBehaviour
         else
             StaticGameData.isMusicOn = true;
 
-        if (GameObject.Find("MusicButton").GetComponent<Image>().sprite == soundImage)
-            GameObject.Find("MusicButton").GetComponent<Image>().sprite = noSoundImage;
-        else
-            GameObject.Find("MusicButton").GetComponent<Image>().sprite = soundImage;
+        checkSoundImage();
     }
 }
 
 public static class StaticGameData{
     public static Game Game { get; set; }
+    public static int HighScore { get; set; }
     public static int ActualMinigame { get; set; } = 0;
     public static bool isLost { get; set; } = false;
     public static AudioClip winSoundEffect { get; set; }
@@ -122,6 +144,45 @@ public static class StaticGameData{
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScreen");
         
+    }
+
+    public static void saveHighScore()
+    {
+        try
+        {
+            if (isHigherThanHighScore(StaticGameData.Game.Points))
+            {
+                StaticGameData.HighScore = StaticGameData.Game.Points;
+                StreamWriter sw = new StreamWriter("Assets//saves//save.txt");
+                sw.WriteLine(StaticGameData.HighScore + "");
+                sw.Close();
+            }
+        }
+        catch
+        {
+
+        }
+    }
+
+    private static bool isHigherThanHighScore(int score)
+    {
+        return (score > getHighScore()) ;
+    }
+
+    public static int getHighScore()
+    {
+        int highScore = 0;
+        try
+        {
+            StreamReader sr = new StreamReader("Assets//saves//save.txt");
+            highScore = int.Parse(sr.ReadLine());
+            sr.Close();
+        }
+        catch
+        {
+
+        }
+        return highScore;
     }
 
     public static Game getNewGame()

@@ -16,4 +16,10 @@ public class ReplayButtonController : MonoBehaviour
 
     }
 
+    public void onClickMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("EndingScreen");
+    }
+
 }
