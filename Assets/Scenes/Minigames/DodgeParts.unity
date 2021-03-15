@@ -1271,7 +1271,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 400, y: 70}
+  m_SizeDelta: {x: 500, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560376214
 MonoBehaviour:
@@ -1294,7 +1294,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 494801f6f5901884890dd67669afe7e9, type: 3}
     m_FontSize: 30
     m_FontStyle: 1
     m_BestFit: 0
@@ -1306,7 +1306,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Esquivez les pi\xE8ces !\nUsez des fl\xE8ches du clavier"
+  m_Text: 'Esquive les pieces !
+
+    Utilise les fleches du clavier'
 --- !u!222 &1560376215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1616,7 +1618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94373bdf2cc164d4eb7f57a6d76fcc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchSpeed: 175
+  launchSpeed: 1
 --- !u!4 &1943098164
 Transform:
   m_ObjectHideFlags: 0

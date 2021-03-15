@@ -18,6 +18,8 @@ public class ReplayButtonController : MonoBehaviour
 
     public void onClickMenu()
     {
+        StaticGameData.isLost = false;
+        StaticGameData.Game.Points = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("EndingScreen");
     }

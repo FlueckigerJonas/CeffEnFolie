@@ -111,6 +111,6 @@ class Part
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
         float x = part.transform.position.x;
         float y = part.transform.position.y;
-        rigidbody.velocity = new Vector2((x-gameObject.transform.position.x)*speed*Time.deltaTime, (y - gameObject.transform.position.y)*speed * Time.deltaTime);
+        rigidbody.velocity = new Vector2((x-gameObject.transform.position.x)*speed, (y - gameObject.transform.position.y)*speed);
     }
 }
